@@ -45,11 +45,13 @@ namespace Commentor
                 var properties = new Dictionary<string, string>();
 
                 if (propertyTypeSymbol.OriginalDefinition.SetMethod != null)
-                { 
+                {
                     properties.Add("summary", $"Gets or Sets the {SplitCamelCase(propertyTypeSymbol.Name)}.");
                 }
-
-                properties.Add("summary", $"Gets the {SplitCamelCase(propertyTypeSymbol.Name)}.");
+                else 
+                { 
+                    properties.Add("summary", $"Gets the {SplitCamelCase(propertyTypeSymbol.Name)}.");
+                }
 
                 var props = properties.ToImmutableDictionary();
                 var diagnostic = Diagnostic.Create(Rule, propertyTypeSymbol.Locations[0], props, propertyTypeSymbol.Name);
