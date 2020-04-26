@@ -100,11 +100,13 @@ namespace Commentor
                     properties.Add("returns", "The result.");
                 }
 
+                int count = 1;
                 foreach (var param in methodTypeSymbol.Parameters)
                 {
-                    var key = $"Parameter:{param.Name}";
+                    var key = $"Parameter{count}:{param.Name}";
                     var value = $"The {SplitCamelCase(param.Name)}.";
                     properties.Add(key, value);
+                    count++;
                 }
 
                 var props = properties.ToImmutableDictionary();

@@ -81,8 +81,11 @@ namespace Commentor
             comments.AppendLine($"{columnOffsetString}/// {props["summary"]}");
             comments.AppendLine($"{columnOffsetString}/// </summary>");
 
+            var keys = props.Keys.Where(x => x.Contains("Parameter")).ToList();
+            keys.Sort();
+
             // add params
-            foreach (var param in props.Keys.Where(x => x.Contains("Parameter")))
+            foreach (var param in keys)
             {
                 var paramDetails = props[param];
                 var paramName = param.Split(':')[1];
